@@ -13,6 +13,7 @@ function createWindow() {
     }
   });
  
+  win.center()
   win.loadURL("http://localhost:3000/");
 
   ipcProcess(win);    //4.调用进程通信模块，参数为window对象

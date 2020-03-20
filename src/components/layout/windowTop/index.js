@@ -3,15 +3,26 @@ import "./index.css";
 import Minimize from "react-icons/lib/md/remove";
 import Maximize from "react-icons/lib/md/crop-square";
 import Close from "react-icons/lib/md/close";
-import UnMaximize from 'react-icons/lib/md/filter-none';
+import UnMaximize from "react-icons/lib/md/filter-none";
 const electron = window.require("electron");
 
 const WindowTop = () => {
   const [isMaximized, setIsMaximized] = useState(null);
 
+  const mainProcessListner = () => {
+    electron.ipcRenderer.on("maximized", () => {
+      setIsMaximized(true);
+    });
+
+    electron.ipcRenderer.on("unmaximized", () => {
+      setIsMaximized(false);
+    });
+  };
+
   useEffect(() => {
     setIsMaximized(electron.ipcRenderer.send("isMaximized"));
-  },[]);
+    mainProcessListner();
+  }, []);
 
   const minHandler = () => {
     electron.ipcRenderer.send("minimize");
@@ -19,11 +30,10 @@ const WindowTop = () => {
   const maxHandler = () => {
     if (!isMaximized) {
       electron.ipcRenderer.send("maximize");
-      setIsMaximized(true)
-    }
-    else {
+      setIsMaximized(true);
+    } else {
       electron.ipcRenderer.send("unmaximize");
-      setIsMaximized(false)
+      setIsMaximized(false);
     }
   };
   const closeHandler = () => {
@@ -35,7 +45,7 @@ const WindowTop = () => {
         <Minimize />
       </button>
       <button onClick={maxHandler}>
-        {isMaximized?<UnMaximize/>:<Maximize />}
+        {isMaximized ? <UnMaximize /> : <Maximize />}
       </button>
       <button onClick={closeHandler}>
         <Close />
