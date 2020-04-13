@@ -1,6 +1,6 @@
-:root{
-  margin: 0;
-  padding: 0;
-  --primary-color: #a8d8ea;
-  --secondary-color: #aa96da;
+.app {
+  background-color: var(--background-color);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

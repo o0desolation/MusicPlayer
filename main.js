@@ -1,35 +1,35 @@
-const { app, BrowserWindow , Menu} = require("electron");
-const path = require('path')
-const url = require('url')
+const { app, BrowserWindow, Menu } = require("electron");
+const path = require("path");
+const url = require("url");
 
 function createWindow() {
-
-  Menu.setApplicationMenu(null)           //windows下去掉菜单栏
-
+  // Menu.setApplicationMenu(null)           //windows下去掉菜单栏
   const win = new BrowserWindow({
-    width: 1200,
-    height: 900,
+    width: 1020,
+    minWidth: 1020,
+    height: 680,
+    minHeight: 680,
     center: true,
+    frame: false,
+    experimentalFeatures: true,
     webPreferences: {
       nodeIntegration: true,
-    }
+    },
   });
-  if(process.env.NODE_ENV === 'development'){
-    win.loadURL("http://localhost:3000/")
+  if (process.env.NODE_ENV === "development") {
+    win.loadURL("http://localhost:3000/");
+    win.webContents.openDevTools();
+  } else if (process.env.NODE_ENV === "production") {
+    win.loadURL(
+      url.format({
+        pathname: path.join(__dirname, "./build/index.html"),
+        protocol: "file:",
+        slashes: true,
+      })
+    );
+  } else {
+    throw new Error("NODE_ENV is not found");
   }
-  else if(process.env.NODE_ENV === 'production'){
-    win.loadURL(url.format({
-      pathname: path.join(__dirname, './build/index.html'),
-      protocol: 'file:',
-      slashes: true
-    }))
-  }
-  else{
-    throw new Error("NODE_ENV is not found")
-  }
-  
-  win.webContents.openDevTools ()
-  
 }
 
 app.whenReady().then(createWindow);
