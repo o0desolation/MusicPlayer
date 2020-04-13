@@ -1,0 +1,37 @@
+.mainBar {
+  display: flex;
+  justify-content: flex-end;
+  height: 32px;
+  width: 100%;
+  -webkit-app-region: drag;
+  padding-bottom: 4px;
+}
+
+.menu {
+  padding-top: 4px;
+  -webkit-app-region: no-drag;
+}
+
+.titleIcon {
+  font-size: 24px;
+  color: var(--icon-color);
+  margin-left: 4px;
+  margin-inline-end: 6px;
+}
+
+.title {
+  padding-top: 4px;
+}
+
+.windowBtns {
+  display: flex;
+}
+
+button {
+  border: unset;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  width: 46px;
+  outline: none;
+  -webkit-app-region: no-drag;
+}

@@ -1,0 +1,5 @@
+.searchBox{
+    width: 200px;
+    border: 2px solid var(--text-color);
+    border-radius: 15px;
+}
