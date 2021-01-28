@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
-    "electron": "^8.1.1"
+    "electron": "^9.4.0"
   },
   "author": "o0desolation <o0desolation@hotmail.com>",
   "license": "MIT"
